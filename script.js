@@ -14,9 +14,9 @@ var entry;
     }
   });
   
-  
-  $('#go').on('click', function () {   
-   searchItem = document.getElementById('searchText').value;
+  function activate (){
+    
+    searchItem = document.getElementById('searchText').value;
   
  $.getJSON('https://en.wikipedia.org/w/api.php?action=query&list=search&srsearch='+searchItem+'&format=json&callback=?', function(data){
     console.log(data);
@@ -32,6 +32,21 @@ var entry;
   
 });
   
+  }
+  
+  $('#go').on('click', function () {   
+   //CHANGE: Moved activate function inside click action
+   //Removed lengthy code
+    activate();
  });
+  
+  //CHANGE: Everything below is new code
+  var search=document.getElementById('searchText');
+  search.addEventListener('keydown',function (k){
+    if(k.keyCode===13){
+      activate();
+    }
+  });
+  
   
 }
